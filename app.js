@@ -17,11 +17,19 @@ new Vue({
                 return;
             }
            
-            this.playerHealth -= this.calcDamage(5, 12);
-            this.checkWin();
+            this.monsterAttack();
         },
         specialAttack() {
+            this.monsterHealth -= this.calcDamage(10, 20);
+            if (this.checkWin()) {
+                return;
+            }
 
+            this.monsterAttack();
+        },
+        monsterAttack() {
+            this.playerHealth -= this.calcDamage(5, 12);
+            this.checkWin();
         },
         heal() {
 
@@ -41,8 +49,7 @@ new Vue({
                     this.gameIsRunning = false;
                     return true;
                 }
-            }
-            if (this.playerHealth <= 0) {
+            } else if (this.playerHealth <= 0) {
                 if (confirm('You lost! New Game?')) {
                     this.startGame();
                     return true;
