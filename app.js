@@ -32,10 +32,16 @@ new Vue({
             this.checkWin();
         },
         heal() {
+            if (this.playerHealth <= 90) {
+                this.playerHealth += 10;
+            } else {
+                this.playerHealth = 100;
+            }
 
+            this.monsterAttack();
         },
         giveUp() {
-
+            this.gameIsRunning = false;
         },
         calcDamage(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
